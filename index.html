@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IVEORY Theory Assessment</title>
+    <title>IVEORY Theory Quiz</title>
     <style>
         * {
             margin: 0;
@@ -17,299 +17,141 @@
             color: #1A1A1A;
             line-height: 1.6;
             min-height: 100vh;
-            animation: backgroundShift 20s ease-in-out infinite;
-            overflow-x: hidden;
-        }
-
-        @keyframes backgroundShift {
-            0%, 100% { background: linear-gradient(135deg, #F8F6F0 0%, #C4ACE3 50%, #B8DCF2 100%); }
-            33% { background: linear-gradient(135deg, #B8DCF2 0%, #F8F6F0 50%, #C4ACE3 100%); }
-            66% { background: linear-gradient(135deg, #C4ACE3 0%, #B8DCF2 50%, #F8F6F0 100%); }
-        }
-
-        /* Floating particles */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 1;
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: rgba(196, 172, 227, 0.3);
-            border-radius: 50%;
-            animation: float 15s infinite linear;
-        }
-
-        @keyframes float {
-            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
         }
 
         .quiz-container {
-            max-width: 950px;
+            max-width: 800px;
             margin: 0 auto;
             padding: 20px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            position: relative;
-            z-index: 10;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 40px;
-            animation: fadeInDown 1.2s ease-out;
+            margin-bottom: 30px;
+            animation: fadeInDown 0.8s ease-out;
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-30px); }
+            from { opacity: 0; transform: translateY(-20px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         .logo {
-            font-size: 3.5rem;
+            font-size: 2.5rem;
             font-weight: bold;
-            background: linear-gradient(45deg, #C4ACE3, #B8DCF2, #C4ACE3);
-            background-size: 200% 200%;
+            background: linear-gradient(45deg, #C4ACE3, #B8DCF2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 10px;
-            letter-spacing: 6px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
-            animation: sparkle 4s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
-            position: relative;
-        }
-
-        @keyframes sparkle {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.08); }
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+            margin-bottom: 8px;
+            letter-spacing: 3px;
         }
 
         .subtitle {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: #1A1A1A;
             font-weight: 500;
-            margin-bottom: 30px;
-            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            margin-bottom: 20px;
             font-style: italic;
+            opacity: 0.9;
         }
 
         .welcome-page {
-            background: linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(232, 230, 227, 0.9) 100%);
-            border-radius: 35px;
-            padding: 70px 60px;
+            background: rgba(248, 246, 240, 0.95);
+            border-radius: 25px;
+            padding: 50px 40px;
             text-align: center;
-            box-shadow: 
-                0 25px 60px rgba(26, 26, 26, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.7);
-            border: 3px solid rgba(196, 172, 227, 0.3);
-            animation: welcomeReveal 1.5s ease-out;
-            backdrop-filter: blur(20px);
-            position: relative;
-            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(26, 26, 26, 0.1);
+            border: 2px solid rgba(196, 172, 227, 0.3);
+            animation: slideInUp 0.6s ease-out;
         }
 
-        .welcome-page::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(196, 172, 227, 0.1) 0%, transparent 70%);
-            animation: rotate 20s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes welcomeReveal {
-            from { 
-                opacity: 0; 
-                transform: scale(0.9) translateY(30px) rotateX(10deg); 
-            }
-            to { 
-                opacity: 1; 
-                transform: scale(1) translateY(0) rotateX(0deg); 
-            }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .welcome-title {
-            font-size: 3.2rem;
-            margin-bottom: 25px;
-            background: linear-gradient(45deg, #C4ACE3, #B8DCF2, #C4ACE3);
-            background-size: 200% 200%;
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #C4ACE3, #B8DCF2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             font-weight: bold;
-            animation: titleGlow 4s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes titleGlow {
-            0%, 100% { 
-                text-shadow: 0 0 20px rgba(196, 172, 227, 0.3);
-                transform: scale(1);
-            }
-            50% { 
-                text-shadow: 0 0 40px rgba(184, 220, 242, 0.5);
-                transform: scale(1.02);
-            }
         }
 
         .welcome-description {
-            font-size: 1.4rem;
+            font-size: 1.1rem;
             color: #1A1A1A;
-            margin-bottom: 35px;
-            line-height: 1.8;
+            margin-bottom: 30px;
+            line-height: 1.6;
             font-style: italic;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
+            opacity: 0.8;
         }
 
         .theory-preview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 25px;
-            margin: 50px 0;
-            padding: 40px 30px;
-            background: linear-gradient(135deg, rgba(248, 246, 240, 0.6) 0%, rgba(232, 230, 227, 0.4) 100%);
-            border-radius: 25px;
-            border: 2px solid rgba(196, 172, 227, 0.2);
-            backdrop-filter: blur(10px);
-            position: relative;
-            z-index: 2;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
+            margin: 35px 0;
+            padding: 25px;
+            background: rgba(248, 246, 240, 0.5);
+            border-radius: 15px;
+            border: 1px solid rgba(196, 172, 227, 0.2);
         }
 
         .theory-icon {
-            font-size: 3rem;
-            animation: floatTheory 3s ease-in-out infinite;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            font-size: 2rem;
+            transition: transform 0.3s ease;
         }
 
         .theory-icon:hover {
-            transform: scale(1.3) rotate(15deg);
-            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+            transform: scale(1.1);
         }
 
-        @keyframes floatTheory {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-12px); }
-        }
-
-        .theory-icon:nth-child(1) { animation-delay: 0s; color: #87ceeb; }
-        .theory-icon:nth-child(2) { animation-delay: 0.4s; color: #ffefd5; }
-        .theory-icon:nth-child(3) { animation-delay: 0.8s; color: #c0c0c0; }
-        .theory-icon:nth-child(4) { animation-delay: 1.2s; color: #fdf6e3; }
-        .theory-icon:nth-child(5) { animation-delay: 1.6s; color: #f8fbff; }
-        .theory-icon:nth-child(6) { animation-delay: 2s; color: #f2f0eb; }
+        .theory-icon:nth-child(1) { color: #87ceeb; }
+        .theory-icon:nth-child(2) { color: #ffefd5; }
+        .theory-icon:nth-child(3) { color: #c0c0c0; }
+        .theory-icon:nth-child(4) { color: #fdf6e3; }
+        .theory-icon:nth-child(5) { color: #f8fbff; }
+        .theory-icon:nth-child(6) { color: #f2f0eb; }
 
         .start-btn {
             background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
             color: white;
-            padding: 22px 50px;
+            padding: 15px 35px;
             border: none;
-            border-radius: 40px;
-            font-size: 1.4rem;
+            border-radius: 25px;
+            font-size: 1.1rem;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             font-family: 'Georgia', serif;
             font-weight: 600;
-            box-shadow: 
-                0 12px 30px rgba(196, 172, 227, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.3);
-            position: relative;
-            overflow: hidden;
-            z-index: 2;
-        }
-
-        .start-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-        }
-
-        .start-btn:active::before {
-            width: 400px;
-            height: 400px;
+            box-shadow: 0 8px 20px rgba(196, 172, 227, 0.3);
         }
 
         .start-btn:hover {
-            transform: translateY(-6px) scale(1.05);
-            box-shadow: 
-                0 18px 40px rgba(196, 172, 227, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.4);
-            background: linear-gradient(135deg, #B8A0D9, #A8CCE8);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(196, 172, 227, 0.4);
         }
 
         .quiz-card {
-            background: linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(232, 230, 227, 0.9) 100%);
-            border-radius: 30px;
-            padding: 60px 50px;
-            box-shadow: 
-                0 20px 50px rgba(26, 26, 26, 0.15),
-                inset 0 1px 0 rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(20px);
-            border: 3px solid rgba(196, 172, 227, 0.3);
-            animation: slideInUp 0.8s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .quiz-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(184, 220, 242, 0.1) 0%, transparent 70%);
-            animation: rotate 25s linear infinite reverse;
-            pointer-events: none;
-        }
-
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+            background: rgba(248, 246, 240, 0.95);
+            border-radius: 25px;
+            padding: 40px;
+            box-shadow: 0 15px 40px rgba(26, 26, 26, 0.1);
+            border: 2px solid rgba(196, 172, 227, 0.3);
+            animation: slideInUp 0.6s ease-out;
         }
 
         .question {
-            margin-bottom: 35px;
-            animation: fadeIn 0.8s ease-out;
-            position: relative;
-            z-index: 2;
+            margin-bottom: 25px;
+            animation: fadeIn 0.5s ease-out;
         }
 
         @keyframes fadeIn {
@@ -318,8 +160,8 @@
         }
 
         .question h3 {
-            font-size: 1.5rem;
-            margin-bottom: 30px;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
             color: #1A1A1A;
             text-align: center;
             font-weight: 600;
@@ -328,328 +170,164 @@
 
         .options {
             display: grid;
-            gap: 20px;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
         }
 
         .option {
             background: linear-gradient(135deg, #F8F6F0 0%, #E8E6E3 100%);
             border: 2px solid #E8E6E3;
-            border-radius: 20px;
-            padding: 30px 25px;
+            border-radius: 15px;
+            padding: 20px;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             text-align: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .option::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(196, 172, 227, 0.3), transparent);
-            transition: left 0.8s ease;
-        }
-
-        .option:hover::before {
-            left: 100%;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
         }
 
         .option:hover {
             border-color: #C4ACE3;
-            background: linear-gradient(135deg, #F8F6F0 0%, rgba(196, 172, 227, 0.15) 100%);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(196, 172, 227, 0.3);
+            background: linear-gradient(135deg, #F8F6F0 0%, rgba(196, 172, 227, 0.1) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 172, 227, 0.2);
         }
 
         .option.selected {
             border-color: #C4ACE3;
-            background: linear-gradient(135deg, rgba(196, 172, 227, 0.25) 0%, rgba(184, 220, 242, 0.25) 100%);
-            transform: translateY(-6px);
-            box-shadow: 
-                0 15px 35px rgba(196, 172, 227, 0.4),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { 
-                box-shadow: 0 15px 35px rgba(196, 172, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
-            }
-            50% { 
-                box-shadow: 0 20px 45px rgba(184, 220, 242, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-            }
+            background: linear-gradient(135deg, rgba(196, 172, 227, 0.2) 0%, rgba(184, 220, 242, 0.2) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 172, 227, 0.3);
         }
 
         .option-text {
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #1A1A1A;
             font-weight: 500;
-            line-height: 1.6;
+            line-height: 1.5;
         }
 
         .progress-bar {
             width: 100%;
-            height: 14px;
-            background: linear-gradient(135deg, #E8E6E3, #D8D6D3);
-            border-radius: 20px;
-            margin: 35px 0;
+            height: 8px;
+            background: #E8E6E3;
+            border-radius: 10px;
+            margin: 25px 0;
             overflow: hidden;
-            box-shadow: inset 0 2px 6px rgba(26, 26, 26, 0.1);
-            position: relative;
-            z-index: 2;
+            box-shadow: inset 0 1px 3px rgba(26, 26, 26, 0.1);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #C4ACE3, #B8DCF2, #C4ACE3);
-            background-size: 200% 100%;
-            border-radius: 20px;
-            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-            animation: progressShimmer 3s ease-in-out infinite;
+            background: linear-gradient(90deg, #C4ACE3, #B8DCF2);
+            border-radius: 10px;
+            transition: width 0.5s ease;
         }
 
-        @keyframes progressShimmer {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
+        .result-card {
+            text-align: center;
+            background: rgba(248, 246, 240, 0.95);
+            border-radius: 25px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 40px rgba(26, 26, 26, 0.1);
+            border: 2px solid rgba(196, 172, 227, 0.3);
+            animation: slideInUp 0.6s ease-out;
         }
 
-        .progress-fill::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            animation: shimmer 2.5s ease-in-out infinite;
+        .theory-symbol {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            display: block;
         }
 
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
+        .theory-title {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #C4ACE3, #B8DCF2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
         }
 
-        .navigation {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 45px;
-            gap: 25px;
-            position: relative;
-            z-index: 2;
+        .theory-member {
+            font-size: 1.2rem;
+            color: #1A1A1A;
+            margin-bottom: 25px;
+            font-weight: 500;
+            opacity: 0.9;
+        }
+
+        .theory-description {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            color: #1A1A1A;
+            margin-bottom: 30px;
+            text-align: left;
+            background: rgba(248, 246, 240, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 4px solid #C4ACE3;
+        }
+
+        .share-section {
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 2px solid rgba(196, 172, 227, 0.3);
         }
 
         .btn {
-            padding: 18px 40px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 35px;
-            font-size: 1.1rem;
+            border-radius: 20px;
+            font-size: 1rem;
             cursor: pointer;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             font-family: inherit;
             font-weight: 600;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.5s, height 0.5s;
-        }
-
-        .btn:active::before {
-            width: 350px;
-            height: 350px;
+            margin: 5px;
         }
 
         .btn-primary {
             background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
             color: white;
-            box-shadow: 0 10px 25px rgba(196, 172, 227, 0.4);
+            box-shadow: 0 6px 15px rgba(196, 172, 227, 0.3);
         }
 
         .btn-primary:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(196, 172, 227, 0.6);
-            background: linear-gradient(135deg, #B8A0D9, #A8CCE8);
-        }
-
-        .btn-secondary {
-            background: linear-gradient(135deg, #E8E6E3, #F8F6F0);
-            color: #1A1A1A;
-            border: 2px solid #E8E6E3;
-        }
-
-        .btn-secondary:hover {
-            background: linear-gradient(135deg, #F8F6F0, #E8E6E3);
-            border-color: #C4ACE3;
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(196, 172, 227, 0.3);
-        }
-
-        .btn:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .result-card {
-            text-align: center;
-            background: linear-gradient(135deg, rgba(248, 246, 240, 0.98) 0%, rgba(232, 230, 227, 0.95) 100%);
-            border-radius: 35px;
-            padding: 70px 60px;
-            box-shadow: 
-                0 25px 60px rgba(26, 26, 26, 0.2),
-                inset 0 1px 0 rgba(255, 255, 255, 0.7);
-            border: 3px solid rgba(196, 172, 227, 0.4);
-            animation: resultReveal 1.2s ease-out;
-            backdrop-filter: blur(25px);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .result-card::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(196, 172, 227, 0.1) 0%, transparent 70%);
-            animation: rotate 30s linear infinite;
-            pointer-events: none;
-        }
-
-        @keyframes resultReveal {
-            from { 
-                opacity: 0; 
-                transform: scale(0.8) rotateY(-15deg); 
-            }
-            to { 
-                opacity: 1; 
-                transform: scale(1) rotateY(0deg); 
-            }
-        }
-
-        .theory-symbol {
-            font-size: 6rem;
-            margin-bottom: 30px;
-            display: block;
-            animation: symbolFloat 4s ease-in-out infinite;
-            text-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes symbolFloat {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(5deg); }
-        }
-
-        .theory-title {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            background: linear-gradient(45deg, #C4ACE3, #B8DCF2, #C4ACE3);
-            background-size: 200% 200%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            font-weight: bold;
-            animation: gradientShift 3s ease-in-out infinite;
-            position: relative;
-            z-index: 2;
-        }
-
-        .theory-member {
-            font-size: 1.5rem;
-            color: #1A1A1A;
-            margin-bottom: 40px;
-            font-weight: 500;
-            opacity: 0.9;
-            position: relative;
-            z-index: 2;
-        }
-
-        .theory-description {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: #1A1A1A;
-            margin-bottom: 40px;
-            text-align: left;
-            background: linear-gradient(135deg, rgba(248, 246, 240, 0.8) 0%, rgba(232, 230, 227, 0.6) 100%);
-            padding: 30px;
-            border-radius: 20px;
-            border-left: 5px solid #C4ACE3;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 2;
-        }
-
-        .share-section {
-            margin-top: 50px;
-            padding-top: 40px;
-            border-top: 2px solid rgba(196, 172, 227, 0.3);
-            position: relative;
-            z-index: 2;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(196, 172, 227, 0.4);
         }
 
         .restart-btn {
             background: linear-gradient(135deg, #B8DCF2, #C4ACE3);
             color: white;
-            margin-top: 30px;
-            box-shadow: 0 10px 25px rgba(184, 220, 242, 0.4);
+            box-shadow: 0 6px 15px rgba(184, 220, 242, 0.3);
         }
 
         .restart-btn:hover {
-            background: linear-gradient(135deg, #A8CCE8, #B8A0D9);
-            transform: translateY(-4px);
-            box-shadow: 0 15px 35px rgba(184, 220, 242, 0.6);
-        }
-
-        .fun-emoji {
-            font-size: 1.5rem;
-            margin: 0 10px;
-            display: inline-block;
-            animation: bounce 2.5s ease-in-out infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(184, 220, 242, 0.4);
         }
 
         .question-counter {
             background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
             color: white;
-            padding: 10px 25px;
-            border-radius: 25px;
-            font-size: 1rem;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 25px;
+            margin-bottom: 15px;
             display: inline-block;
-            box-shadow: 0 6px 15px rgba(196, 172, 227, 0.3);
-            position: relative;
-            z-index: 2;
+            box-shadow: 0 4px 10px rgba(196, 172, 227, 0.2);
         }
 
         .hidden {
             display: none !important;
+        }
+
+        .fun-emoji {
+            font-size: 1.2rem;
+            margin: 0 5px;
         }
 
         /* Responsive design */
@@ -659,35 +337,32 @@
             }
             
             .logo {
-                font-size: 2.5rem;
-                letter-spacing: 3px;
+                font-size: 2rem;
+                letter-spacing: 2px;
             }
             
             .welcome-page, .quiz-card, .result-card {
-                padding: 40px 30px;
+                padding: 30px 20px;
             }
             
             .options {
                 grid-template-columns: 1fr;
-                gap: 15px;
-            }
-            
-            .navigation {
-                flex-direction: column;
-                gap: 15px;
+                gap: 12px;
             }
             
             .theory-preview {
                 grid-template-columns: repeat(3, 1fr);
-                gap: 20px;
-                padding: 30px 20px;
+                gap: 15px;
+                padding: 20px 15px;
+            }
+            
+            .theory-icon {
+                font-size: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="particles"></div>
-    
     <div class="quiz-container">
         <div class="header">
             <div class="logo">IVEORY</div>
@@ -710,7 +385,7 @@
                 <div class="theory-icon">⚜</div>
             </div>
             
-            <p style="margin-bottom: 35px; color: #1A1A1A; font-style: italic; font-size: 1.1rem; opacity: 0.8;">
+            <p style="margin-bottom: 25px; color: #1A1A1A; font-style: italic; font-size: 1rem; opacity: 0.8;">
                 "Born from starlight, refined by theory, destined to inspire."
             </p>
             
@@ -727,11 +402,6 @@
             <div class="question" id="question-container">
                 <!-- Questions will be inserted here -->
             </div>
-
-            <div class="navigation">
-                <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()">Previous</button>
-                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next</button>
-            </div>
         </div>
 
         <div id="result-section" class="result-card hidden">
@@ -740,21 +410,6 @@
     </div>
 
     <script>
-        // Create floating particles
-        function createParticles() {
-            const particlesContainer = document.querySelector('.particles');
-            for (let i = 0; i < 15; i++) {
-                const particle = document.createElement('div');
-                particle.className = 'particle';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.animationDelay = Math.random() * 15 + 's';
-                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-                particlesContainer.appendChild(particle);
-            }
-        }
-
-        createParticles();
-
         const questions = [
             {
                 question: "When facing a difficult situation, your first instinct is to:",
@@ -893,13 +548,10 @@
 
         let currentQuestion = 0;
         let answers = {};
-        let selectedOption = null;
-        let quizStarted = false;
 
         function startQuiz() {
             document.getElementById('welcome-section').classList.add('hidden');
             document.getElementById('quiz-section').classList.remove('hidden');
-            quizStarted = true;
             displayQuestion();
         }
 
@@ -908,7 +560,7 @@
             const container = document.getElementById('question-container');
             
             container.innerHTML = `
-                <div class="question-counter">Question ${currentQuestion + 1} of ${questions.length} <span class="fun-emoji">✨</span></div>
+                <div class="question-counter">Question ${currentQuestion + 1} of ${questions.length}</div>
                 <h3>${question.question}</h3>
                 <div class="options">
                     ${question.options.map((option, index) => `
@@ -920,110 +572,31 @@
             `;
 
             updateProgress();
-            updateNavigation();
-            selectedOption = null;
         }
 
         function selectOption(index, theory) {
-            // Remove previous selection
-            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            // Store answer
+            answers[currentQuestion] = theory;
             
-            // Add selection to clicked option with fun effect
+            // Visual feedback
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
             const selectedElement = document.querySelectorAll('.option')[index];
             selectedElement.classList.add('selected');
             
-            // Add sparkle effect
-            createSparkles(selectedElement);
-            
-            // Store answer
-            answers[currentQuestion] = theory;
-            selectedOption = index;
-            
-            // Enable next button with delay for effect
+            // Auto-advance after short delay
             setTimeout(() => {
-                document.getElementById('next-btn').disabled = false;
-            }, 300);
-        }
-
-        function createSparkles(element) {
-            for (let i = 0; i < 8; i++) {
-                const sparkle = document.createElement('div');
-                sparkle.innerHTML = ['✨', '💫', '⭐', '🌟'][Math.floor(Math.random() * 4)];
-                sparkle.style.position = 'absolute';
-                sparkle.style.fontSize = '1.5rem';
-                sparkle.style.pointerEvents = 'none';
-                sparkle.style.zIndex = '1000';
-                sparkle.style.animation = `sparkleEffect 1.5s ease-out forwards`;
-                
-                const rect = element.getBoundingClientRect();
-                sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
-                sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
-                
-                document.body.appendChild(sparkle);
-                
-                setTimeout(() => sparkle.remove(), 1500);
-            }
-        }
-
-        // Add sparkle animation to CSS
-        const sparkleStyle = document.createElement('style');
-        sparkleStyle.textContent = `
-            @keyframes sparkleEffect {
-                0% { 
-                    opacity: 0; 
-                    transform: scale(0) rotate(0deg); 
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    displayQuestion();
+                } else {
+                    showResults();
                 }
-                30% { 
-                    opacity: 1; 
-                    transform: scale(1.3) rotate(180deg); 
-                }
-                100% { 
-                    opacity: 0; 
-                    transform: scale(0) rotate(360deg) translateY(-60px); 
-                }
-            }
-        `;
-        document.head.appendChild(sparkleStyle);
-
-        function nextQuestion() {
-            if (selectedOption === null) return;
-            
-            if (currentQuestion < questions.length - 1) {
-                currentQuestion++;
-                displayQuestion();
-            } else {
-                showResults();
-            }
-        }
-
-        function previousQuestion() {
-            if (currentQuestion > 0) {
-                currentQuestion--;
-                displayQuestion();
-                
-                // Restore previous selection if exists
-                if (answers[currentQuestion] !== undefined) {
-                    const prevTheory = answers[currentQuestion];
-                    const prevIndex = questions[currentQuestion].options.findIndex(opt => opt.theory === prevTheory);
-                    if (prevIndex !== -1) {
-                        selectOption(prevIndex, prevTheory);
-                    }
-                }
-            }
+            }, 600);
         }
 
         function updateProgress() {
             const progress = ((currentQuestion + 1) / questions.length) * 100;
             document.getElementById('progress').style.width = progress + '%';
-        }
-
-        function updateNavigation() {
-            const prevBtn = document.getElementById('prev-btn');
-            const nextBtn = document.getElementById('next-btn');
-            
-            prevBtn.disabled = currentQuestion === 0;
-            nextBtn.disabled = selectedOption === null;
-            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Get Results ✨' : 'Next';
         }
 
         function calculateResult() {
@@ -1043,9 +616,6 @@
             document.getElementById('quiz-section').classList.add('hidden');
             document.getElementById('result-section').classList.remove('hidden');
             
-            // Add confetti effect
-            createConfetti();
-            
             document.getElementById('result-section').innerHTML = `
                 <div class="theory-symbol" style="color: ${theory.color}">${theory.symbol}</div>
                 <div class="theory-title">${theory.title}</div>
@@ -1053,85 +623,38 @@
                 <div class="theory-description">${theory.description}</div>
                 
                 <div class="share-section">
-                    <p style="margin-bottom: 25px; color: #1A1A1A; font-weight: 500; font-size: 1.2rem; font-style: italic;">
+                    <p style="margin-bottom: 20px; color: #1A1A1A; font-weight: 500; font-size: 1rem; font-style: italic;">
                         <span class="fun-emoji">🌟</span>
                         "Born from starlight, refined by theory, destined to inspire."
                         <span class="fun-emoji">🌟</span>
                     </p>
-                    <div style="margin: 35px 0;">
+                    <div style="margin: 25px 0;">
                         <a href="https://thisisiveory.crd.co" target="_blank" style="
                             display: inline-block;
                             background: linear-gradient(135deg, #F8F6F0, #E8E6E3);
                             color: #1A1A1A;
-                            padding: 15px 35px;
-                            border-radius: 30px;
+                            padding: 12px 25px;
+                            border-radius: 20px;
                             text-decoration: none;
                             font-weight: 600;
                             border: 2px solid #C4ACE3;
-                            transition: all 0.4s ease;
-                            margin: 0 10px;
-                            box-shadow: 0 8px 20px rgba(196, 172, 227, 0.3);
-                        " onmouseover="this.style.background='linear-gradient(135deg, #C4ACE3, #B8DCF2)'; this.style.color='white'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 30px rgba(196, 172, 227, 0.5)';" 
-                           onmouseout="this.style.background='linear-gradient(135deg, #F8F6F0, #E8E6E3)'; this.style.color='#1A1A1A'; this.style.transform='translateY(0px)'; this.style.boxShadow='0 8px 20px rgba(196, 172, 227, 0.3)';">
+                            transition: all 0.3s ease;
+                            margin: 0 5px;
+                            box-shadow: 0 4px 12px rgba(196, 172, 227, 0.2);
+                        " onmouseover="this.style.background='linear-gradient(135deg, #C4ACE3, #B8DCF2)'; this.style.color='white'; this.style.transform='translateY(-2px)';" 
+                           onmouseout="this.style.background='linear-gradient(135deg, #F8F6F0, #E8E6E3)'; this.style.color='#1A1A1A'; this.style.transform='translateY(0px)';">
                             Visit Our Kingdom <span class="fun-emoji">👑</span>
                         </a>
                     </div>
-                    <button class="btn btn-primary" onclick="shareResult('${resultTheory}')" style="margin: 10px;">
+                    <button class="btn btn-primary" onclick="shareResult('${resultTheory}')">
                         Share Your Theory <span class="fun-emoji">🚀</span>
                     </button>
                     <button class="btn restart-btn" onclick="restartQuiz()">
-                        Discover Another Theory <span class="fun-emoji">🔄</span>
+                        Take Again <span class="fun-emoji">🔄</span>
                     </button>
                 </div>
             `;
         }
-
-        function createConfetti() {
-            const confettiColors = ['#C4ACE3', '#B8DCF2', '#F8F6F0', '#E8E6E3', '#87ceeb', '#ffefd5'];
-            const confettiShapes = ['🎉', '✨', '💫', '⭐', '🌟', '👑', '♔', '♡', '✧', '◈', '◊', '⚜'];
-            
-            for (let i = 0; i < 50; i++) {
-                const confetti = document.createElement('div');
-                const isEmoji = Math.random() > 0.4;
-                
-                if (isEmoji) {
-                    confetti.innerHTML = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
-                    confetti.style.fontSize = (1.2 + Math.random() * 0.8) + 'rem';
-                } else {
-                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
-                    confetti.style.width = (8 + Math.random() * 6) + 'px';
-                    confetti.style.height = (8 + Math.random() * 6) + 'px';
-                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
-                }
-                
-                confetti.style.position = 'fixed';
-                confetti.style.left = Math.random() * window.innerWidth + 'px';
-                confetti.style.top = '-30px';
-                confetti.style.pointerEvents = 'none';
-                confetti.style.zIndex = '1000';
-                confetti.style.animation = `confettiFall ${3 + Math.random() * 4}s ease-out forwards`;
-                
-                document.body.appendChild(confetti);
-                
-                setTimeout(() => confetti.remove(), 7000);
-            }
-        }
-
-        // Add confetti animation
-        const confettiStyle = document.createElement('style');
-        confettiStyle.textContent = `
-            @keyframes confettiFall {
-                0% { 
-                    transform: translateY(-30px) rotate(0deg); 
-                    opacity: 1; 
-                }
-                100% { 
-                    transform: translateY(${window.innerHeight + 150}px) rotate(${360 + Math.random() * 720}deg); 
-                    opacity: 0; 
-                }
-            }
-        `;
-        document.head.appendChild(confettiStyle);
 
         function shareResult(theory) {
             const theoryData = theories[theory];
@@ -1145,7 +668,6 @@
                 });
             } else {
                 navigator.clipboard.writeText(shareText).then(() => {
-                    // Create elegant notification
                     const notification = document.createElement('div');
                     notification.innerHTML = 'Result copied to clipboard! ✨';
                     notification.style.cssText = `
@@ -1154,22 +676,21 @@
                         right: 20px;
                         background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
                         color: white;
-                        padding: 15px 25px;
-                        border-radius: 25px;
+                        padding: 12px 20px;
+                        border-radius: 20px;
                         font-weight: 600;
-                        box-shadow: 0 10px 25px rgba(196, 172, 227, 0.4);
+                        box-shadow: 0 8px 20px rgba(196, 172, 227, 0.3);
                         z-index: 10000;
-                        animation: slideInRight 0.5s ease-out;
+                        animation: slideInRight 0.3s ease-out;
                     `;
                     document.body.appendChild(notification);
-                    setTimeout(() => notification.remove(), 3000);
+                    setTimeout(() => notification.remove(), 2500);
                 }).catch(() => {
-                    alert('Result ready to share! Copy the text and share it on your social media.');
+                    alert('Result ready to share!');
                 });
             }
         }
 
-        // Add slide-in animation for notification
         const notificationStyle = document.createElement('style');
         notificationStyle.textContent = `
             @keyframes slideInRight {
@@ -1182,8 +703,6 @@
         function restartQuiz() {
             currentQuestion = 0;
             answers = {};
-            selectedOption = null;
-            quizStarted = false;
             
             document.getElementById('result-section').classList.add('hidden');
             document.getElementById('welcome-section').classList.remove('hidden');
