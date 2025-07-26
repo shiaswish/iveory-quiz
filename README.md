@@ -24,4 +24,4 @@ Discover your inner nobility through the IVEORY Theory Assessment. Journey into 
 - Shareable results
 
 ---
-*Visit the [IVEORY Kingdom](https://thisisiveory.crd.co) for more*
+*Visit the [IVEORY Throne](https://thisisiveory.crd.co) for more*
