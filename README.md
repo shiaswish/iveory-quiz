@@ -1,11 +1,11 @@
-# 🌟 IVEORY Theory Assessment
+# 🌟 IVEORY Theory Quiz
 
 *"Born from starlight, refined by theory, destined to inspire."*
 
 ## ✨ About
 Discover your inner nobility through the IVEORY Theory Assessment. Journey into six elegant theories and find which noble path resonates with your soul.
 
-## 🎭 The Six Theories
+## The Six Theories
 - **♔ Theory of Serenity** - Azariah, The Queen
 - **♡ Theory of Softness** - Aemory, The Lady  
 - **✧ Theory of Grace** - Viorael, The Duchess
@@ -24,4 +24,4 @@ Discover your inner nobility through the IVEORY Theory Assessment. Journey into 
 - Shareable results
 
 ---
-*Visit the [IVEORY Throne](https://thisisiveory.crd.co) for more*
+*Visit the [IVEORY THRONE](https://thisisiveory.crd.co) for more*
