@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IVEORY Theory Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #F8F6F0 0%, #C4ACE3 50%, #B8DCF2 100%);
+            color: #1A1A1A;
+            line-height: 1.6;
+            min-height: 100vh;
+            animation: backgroundShift 20s ease-in-out infinite;
+            overflow-x: hidden;
+        }
+
+        @keyframes backgroundShift {
+            0%, 100% { background: linear-gradient(135deg, #F8F6F0 0%, #C4ACE3 50%, #B8DCF2 100%); }
+            33% { background: linear-gradient(135deg, #B8DCF2 0%, #F8F6F0 50%, #C4ACE3 100%); }
+            66% { background: linear-gradient(135deg, #C4ACE3 0%, #B8DCF2 50%, #F8F6F0 100%); }
+        }
+
+        /* Floating particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(196, 172, 227, 0.3);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+        }
+
+        .quiz-container {
+            max-width: 950px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            animation: fadeInDown 1.2s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #C4ACE3, #B8DCF2, #C4ACE3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            letter-spacing: 6px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+            animation: sparkle 4s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            color: #1A1A1A;
+            font-weight: 500;
+            margin-bottom: 30px;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            font-style: italic;
+        }
+
+        .welcome-page {
+            background: linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(232, 230, 227, 0.9) 100%);
+            border-radius: 35px;
+            padding: 70px 60px;
+            text-align: center;
+            box-shadow: 
+                0 25px 60px rgba(26, 26, 26, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            border: 3px solid rgba(196, 172, 227, 0.3);
+            animation: welcomeReveal 1.5s ease-out;
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-page::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(196, 172, 227, 0.1) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes welcomeReveal {
+            from { 
+                opacity: 0; 
+                transform: scale(0.9) translateY(30px) rotateX(10deg); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1) translateY(0) rotateX(0deg); 
+            }
+        }
+
+        .welcome-title {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            background: linear-gradient(45deg, #C4ACE3, #B8DCF2, #C4ACE3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            animation: titleGlow 4s ease-in-out infinite, gradientShift 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% { 
+                text-shadow: 0 0 20px rgba(196, 172, 227, 0.3);
+                transform: scale(1);
+            }
+            50% { 
+                text-shadow: 0 0 40px rgba(184, 220, 242, 0.5);
+                transform: scale(1.02);
+            }
+        }
+
+        .welcome-description {
+            font-size: 1.4rem;
+            color: #1A1A1A;
+            margin-bottom: 35px;
+            line-height: 1.8;
+            font-style: italic;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .theory-preview {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 25px;
+            margin: 50px 0;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, rgba(248, 246, 240, 0.6) 0%, rgba(232, 230, 227, 0.4) 100%);
+            border-radius: 25px;
+            border: 2px solid rgba(196, 172, 227, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            z-index: 2;
+        }
+
+        .theory-icon {
+            font-size: 3rem;
+            animation: floatTheory 3s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        .theory-icon:hover {
+            transform: scale(1.3) rotate(15deg);
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.2));
+        }
+
+        @keyframes floatTheory {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-12px); }
+        }
+
+        .theory-icon:nth-child(1) { animation-delay: 0s; color: #87ceeb; }
+        .theory-icon:nth-child(2) { animation-delay: 0.4s; color: #ffefd5; }
+        .theory-icon:nth-child(3) { animation-delay: 0.8s; color: #c0c0c0; }
+        .theory-icon:nth-child(4) { animation-delay: 1.2s; color: #fdf6e3; }
+        .theory-icon:nth-child(5) { animation-delay: 1.6s; color: #f8fbff; }
+        .theory-icon:nth-child(6) { animation-delay: 2s; color: #f2f0eb; }
+
+        .start-btn {
+            background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
+            color: white;
+            padding: 22px 50px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: 'Georgia', serif;
+            font-weight: 600;
+            box-shadow: 
+                0 12px 30px rgba(196, 172, 227, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .start-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .start-btn:active::before {
+            width: 400px;
+            height: 400px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-6px) scale(1.05);
+            box-shadow: 
+                0 18px 40px rgba(196, 172, 227, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            background: linear-gradient(135deg, #B8A0D9, #A8CCE8);
+        }
+
+        .quiz-card {
+            background: linear-gradient(135deg, rgba(248, 246, 240, 0.95) 0%, rgba(232, 230, 227, 0.9) 100%);
+            border-radius: 30px;
+            padding: 60px 50px;
+            box-shadow: 
+                0 20px 50px rgba(26, 26, 26, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(20px);
+            border: 3px solid rgba(196, 172, 227, 0.3);
+            animation: slideInUp 0.8s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .quiz-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(184, 220, 242, 0.1) 0%, transparent 70%);
+            animation: rotate 25s linear infinite reverse;
+            pointer-events: none;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question {
+            margin-bottom: 35px;
+            animation: fadeIn 0.8s ease-out;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .question h3 {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #1A1A1A;
+            text-align: center;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .options {
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        }
+
+        .option {
+            background: linear-gradient(135deg, #F8F6F0 0%, #E8E6E3 100%);
+            border: 2px solid #E8E6E3;
+            border-radius: 20px;
+            padding: 30px 25px;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(196, 172, 227, 0.3), transparent);
+            transition: left 0.8s ease;
+        }
+
+        .option:hover::before {
+            left: 100%;
+        }
+
+        .option:hover {
+            border-color: #C4ACE3;
+            background: linear-gradient(135deg, #F8F6F0 0%, rgba(196, 172, 227, 0.15) 100%);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(196, 172, 227, 0.3);
+        }
+
+        .option.selected {
+            border-color: #C4ACE3;
+            background: linear-gradient(135deg, rgba(196, 172, 227, 0.25) 0%, rgba(184, 220, 242, 0.25) 100%);
+            transform: translateY(-6px);
+            box-shadow: 
+                0 15px 35px rgba(196, 172, 227, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { 
+                box-shadow: 0 15px 35px rgba(196, 172, 227, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.5);
+            }
+            50% { 
+                box-shadow: 0 20px 45px rgba(184, 220, 242, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            }
+        }
+
+        .option-text {
+            font-size: 1.1rem;
+            color: #1A1A1A;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 14px;
+            background: linear-gradient(135deg, #E8E6E3, #D8D6D3);
+            border-radius: 20px;
+            margin: 35px 0;
+            overflow: hidden;
+            box-shadow: inset 0 2px 6px rgba(26, 26, 26, 0.1);
+            position: relative;
+            z-index: 2;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #C4ACE3, #B8DCF2, #C4ACE3);
+            background-size: 200% 100%;
+            border-radius: 20px;
+            transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            animation: progressShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes progressShimmer {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            animation: shimmer 2.5s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 45px;
+            gap: 25px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            border: none;
+            border-radius: 35px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            font-family: inherit;
+            font-weight: 600;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.5s, height 0.5s;
+        }
+
+        .btn:active::before {
+            width: 350px;
+            height: 350px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
+            color: white;
+            box-shadow: 0 10px 25px rgba(196, 172, 227, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(196, 172, 227, 0.6);
+            background: linear-gradient(135deg, #B8A0D9, #A8CCE8);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #E8E6E3, #F8F6F0);
+            color: #1A1A1A;
+            border: 2px solid #E8E6E3;
+        }
+
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #F8F6F0, #E8E6E3);
+            border-color: #C4ACE3;
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(196, 172, 227, 0.3);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        .result-card {
+            text-align: center;
+            background: linear-gradient(135deg, rgba(248, 246, 240, 0.98) 0%, rgba(232, 230, 227, 0.95) 100%);
+            border-radius: 35px;
+            padding: 70px 60px;
+            box-shadow: 
+                0 25px 60px rgba(26, 26, 26, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.7);
+            border: 3px solid rgba(196, 172, 227, 0.4);
+            animation: resultReveal 1.2s ease-out;
+            backdrop-filter: blur(25px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(196, 172, 227, 0.1) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes resultReveal {
+            from { 
+                opacity: 0; 
+                transform: scale(0.8) rotateY(-15deg); 
+            }
+            to { 
+                opacity: 1; 
+                transform: scale(1) rotateY(0deg); 
+            }
+        }
+
+        .theory-symbol {
+            font-size: 6rem;
+            margin-bottom: 30px;
+            display: block;
+            animation: symbolFloat 4s ease-in-out infinite;
+            text-shadow: 0 8px 20px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes symbolFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(5deg); }
+        }
+
+        .theory-title {
+            font-size: 2.8rem;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #C4ACE3, #B8DCF2, #C4ACE3);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: bold;
+            animation: gradientShift 3s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        .theory-member {
+            font-size: 1.5rem;
+            color: #1A1A1A;
+            margin-bottom: 40px;
+            font-weight: 500;
+            opacity: 0.9;
+            position: relative;
+            z-index: 2;
+        }
+
+        .theory-description {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #1A1A1A;
+            margin-bottom: 40px;
+            text-align: left;
+            background: linear-gradient(135deg, rgba(248, 246, 240, 0.8) 0%, rgba(232, 230, 227, 0.6) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            border-left: 5px solid #C4ACE3;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 2;
+        }
+
+        .share-section {
+            margin-top: 50px;
+            padding-top: 40px;
+            border-top: 2px solid rgba(196, 172, 227, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .restart-btn {
+            background: linear-gradient(135deg, #B8DCF2, #C4ACE3);
+            color: white;
+            margin-top: 30px;
+            box-shadow: 0 10px 25px rgba(184, 220, 242, 0.4);
+        }
+
+        .restart-btn:hover {
+            background: linear-gradient(135deg, #A8CCE8, #B8A0D9);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 35px rgba(184, 220, 242, 0.6);
+        }
+
+        .fun-emoji {
+            font-size: 1.5rem;
+            margin: 0 10px;
+            display: inline-block;
+            animation: bounce 2.5s ease-in-out infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .question-counter {
+            background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: inline-block;
+            box-shadow: 0 6px 15px rgba(196, 172, 227, 0.3);
+            position: relative;
+            z-index: 2;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .quiz-container {
+                padding: 15px;
+            }
+            
+            .logo {
+                font-size: 2.5rem;
+                letter-spacing: 3px;
+            }
+            
+            .welcome-page, .quiz-card, .result-card {
+                padding: 40px 30px;
+            }
+            
+            .options {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .theory-preview {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles"></div>
+    
+    <div class="quiz-container">
+        <div class="header">
+            <div class="logo">IVEORY</div>
+            <div class="subtitle">Discover Your Inner Theory</div>
+        </div>
+
+        <div id="welcome-section" class="welcome-page">
+            <div class="welcome-title">The Theory Codex</div>
+            <div class="welcome-description">
+                Journey into the realm of IVEORY, where six noble theories await your discovery. 
+                Each embodies a unique path to grace, wisdom, and inner nobility.
+            </div>
+            
+            <div class="theory-preview">
+                <div class="theory-icon">♔</div>
+                <div class="theory-icon">♡</div>
+                <div class="theory-icon">✧</div>
+                <div class="theory-icon">◈</div>
+                <div class="theory-icon">◊</div>
+                <div class="theory-icon">⚜</div>
+            </div>
+            
+            <p style="margin-bottom: 35px; color: #1A1A1A; font-style: italic; font-size: 1.1rem; opacity: 0.8;">
+                "Born from starlight, refined by theory, destined to inspire."
+            </p>
+            
+            <button class="start-btn" onclick="startQuiz()">
+                Begin Your Assessment <span class="fun-emoji">✨</span>
+            </button>
+        </div>
+
+        <div id="quiz-section" class="quiz-card hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress"></div>
+            </div>
+
+            <div class="question" id="question-container">
+                <!-- Questions will be inserted here -->
+            </div>
+
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prev-btn" onclick="previousQuestion()">Previous</button>
+                <button class="btn btn-primary" id="next-btn" onclick="nextQuestion()" disabled>Next</button>
+            </div>
+        </div>
+
+        <div id="result-section" class="result-card hidden">
+            <!-- Results will be inserted here -->
+        </div>
+    </div>
+
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            for (let i = 0; i < 15; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        createParticles();
+
+        const questions = [
+            {
+                question: "When facing a difficult situation, your first instinct is to:",
+                options: [
+                    { text: "Stay calm and think through all possibilities before acting", theory: "serenity" },
+                    { text: "Approach it with gentle persistence, knowing patience will prevail", theory: "softness" },
+                    { text: "Find the most graceful way to handle it, even under pressure", theory: "grace" },
+                    { text: "Look for the timeless wisdom that applies to this situation", theory: "timelessness" },
+                    { text: "Maintain your principles and seek the truth, no matter what", theory: "purity" },
+                    { text: "Handle it with sophistication and make it look effortless", theory: "elegance" }
+                ]
+            },
+            {
+                question: "Your ideal environment is:",
+                options: [
+                    { text: "A quiet library with classical architecture and natural light", theory: "timelessness" },
+                    { text: "A minimalist space with clean lines and crystal clear surfaces", theory: "purity" },
+                    { text: "A cozy room with soft textures and warm, gentle lighting", theory: "softness" },
+                    { text: "An art gallery with flowing spaces and beautiful compositions", theory: "grace" },
+                    { text: "A serene garden where you can find peace and stillness", theory: "serenity" },
+                    { text: "A sophisticated salon with refined details and perfect aesthetics", theory: "elegance" }
+                ]
+            },
+            {
+                question: "When giving advice to a friend, you tend to:",
+                options: [
+                    { text: "Remind them of principles that have stood the test of time", theory: "timelessness" },
+                    { text: "Help them find their authentic truth without judgment", theory: "purity" },
+                    { text: "Offer gentle support and encourage them to be kind to themselves", theory: "softness" },
+                    { text: "Show them how to handle the situation with dignity and flow", theory: "grace" },
+                    { text: "Help them find inner peace and clarity before making decisions", theory: "serenity" },
+                    { text: "Guide them to the most refined and sophisticated approach", theory: "elegance" }
+                ]
+            },
+            {
+                question: "Your personal style philosophy is:",
+                options: [
+                    { text: "Less is more - choose quality pieces that will last forever", theory: "timelessness" },
+                    { text: "Authenticity over trends - wear what truly represents you", theory: "purity" },
+                    { text: "Comfort and kindness - choose things that make you feel gentle", theory: "softness" },
+                    { text: "Movement and flow - select pieces that enhance your natural grace", theory: "grace" },
+                    { text: "Peaceful simplicity - opt for calming colors and clean lines", theory: "serenity" },
+                    { text: "Effortless sophistication - curate a refined and polished look", theory: "elegance" }
+                ]
+            },
+            {
+                question: "When you're feeling overwhelmed, you:",
+                options: [
+                    { text: "Remember that this too shall pass and focus on eternal truths", theory: "timelessness" },
+                    { text: "Strip away distractions and focus on what's genuinely important", theory: "purity" },
+                    { text: "Practice self-compassion and treat yourself with kindness", theory: "softness" },
+                    { text: "Move through it with fluid adaptability, bending but not breaking", theory: "grace" },
+                    { text: "Find a quiet space to breathe and restore your inner calm", theory: "serenity" },
+                    { text: "Handle it with composure, maintaining your poise throughout", theory: "elegance" }
+                ]
+            },
+            {
+                question: "Your greatest strength is your ability to:",
+                options: [
+                    { text: "See the bigger picture and understand how everything connects", theory: "timelessness" },
+                    { text: "Cut through confusion and see situations with crystal clarity", theory: "purity" },
+                    { text: "Approach challenges with patience and gentle determination", theory: "softness" },
+                    { text: "Transform difficult moments into something beautiful", theory: "grace" },
+                    { text: "Bring peace to chaotic situations just by being present", theory: "serenity" },
+                    { text: "Make complex things appear simple and effortless", theory: "elegance" }
+                ]
+            },
+            {
+                question: "People often come to you when they need:",
+                options: [
+                    { text: "Perspective on what really matters in the long run", theory: "timelessness" },
+                    { text: "Help seeing through illusions to find the truth", theory: "purity" },
+                    { text: "A gentle presence that makes them feel safe and understood", theory: "softness" },
+                    { text: "Guidance on how to handle situations with dignity", theory: "grace" },
+                    { text: "A calming influence that helps them find their center", theory: "serenity" },
+                    { text: "Someone who can help them navigate social situations gracefully", theory: "elegance" }
+                ]
+            },
+            {
+                question: "Your ideal way to spend a free afternoon is:",
+                options: [
+                    { text: "Reading classic literature or visiting a museum", theory: "timelessness" },
+                    { text: "Decluttering your space and organizing your thoughts", theory: "purity" },
+                    { text: "Taking a gentle walk in nature or enjoying quiet hobbies", theory: "softness" },
+                    { text: "Dancing, yoga, or any activity that connects mind and body", theory: "grace" },
+                    { text: "Meditation, journaling, or simply sitting in peaceful reflection", theory: "serenity" },
+                    { text: "Attending a cultural event or carefully curating your aesthetic space", theory: "elegance" }
+                ]
+            }
+        ];
+
+        const theories = {
+            serenity: {
+                symbol: "♔",
+                title: "Theory of Serenity",
+                member: "Azariah - The Queen",
+                description: "You embody the rare gift of bringing calm to chaos. Your serenity isn't passive—it's an active choice to remain centered while the world spins around you. Like Azariah, you understand that true leadership comes not from force, but from the magnetic pull of inner peace. Your presence becomes a sanctuary for others, and your quiet strength speaks louder than any words.",
+                color: "#87ceeb"
+            },
+            softness: {
+                symbol: "♡",
+                title: "Theory of Softness", 
+                member: "Aemory - The Lady",
+                description: "You understand that the strongest foundations are built on tenderness. Your softness isn't weakness—it's the highest evolution of strength, the confidence to remain gentle in a harsh world. Like Aemory, you prove that yielding can be a form of victory, and that sometimes the most powerful thing you can do is choose compassion over conflict.",
+                color: "#ffefd5"
+            },
+            grace: {
+                symbol: "✧",
+                title: "Theory of Grace",
+                member: "Viorael - The Duchess", 
+                description: "You possess the mystical ability to transform everything you touch into art. Your grace flows through every movement, every word, every choice you make. Like Viorael, you understand that true power lies not in force, but in the fluid mastery of your presence. You create bridges where others see obstacles, turning life's challenges into poetry.",
+                color: "#c0c0c0"
+            },
+            timelessness: {
+                symbol: "◈",
+                title: "Theory of Timelessness",
+                member: "Elle - The Empress",
+                description: "You carry the wisdom of ages and the vision of tomorrow within you. Your understanding transcends trends and temporary things, focusing on what truly endures. Like Elle, you stand where past meets future, serving as a guardian of eternal beauty and truth. Your choices are guided by principles that remain relevant across every era.",
+                color: "#fdf6e3"
+            },
+            purity: {
+                symbol: "◊",
+                title: "Theory of Purity",
+                member: "Aria - The Countess",
+                description: "You see the world with crystalline clarity, unfiltered by illusion or compromise. Your purity isn't about perfection—it's about authenticity, about remaining true to your core values even when the world tries to dim your light. Like Aria, you reflect truth in all its forms, serving as a mirror that shows both beauty and flaws with equal honesty.",
+                color: "#f8fbff"
+            },
+            elegance: {
+                symbol: "⚜",
+                title: "Theory of Elegance",
+                member: "Kumi - The Princess",
+                description: "You possess the rare ability to make the complex appear beautifully simple. Your elegance flows from within like a secret language that only the heart knows how to speak. Like Kumi, you bridge the gap between accessibility and aspiration, transforming ordinary moments into something extraordinary through your refined presence and natural sophistication.",
+                color: "#f2f0eb"
+            }
+        };
+
+        let currentQuestion = 0;
+        let answers = {};
+        let selectedOption = null;
+        let quizStarted = false;
+
+        function startQuiz() {
+            document.getElementById('welcome-section').classList.add('hidden');
+            document.getElementById('quiz-section').classList.remove('hidden');
+            quizStarted = true;
+            displayQuestion();
+        }
+
+        function displayQuestion() {
+            const question = questions[currentQuestion];
+            const container = document.getElementById('question-container');
+            
+            container.innerHTML = `
+                <div class="question-counter">Question ${currentQuestion + 1} of ${questions.length} <span class="fun-emoji">✨</span></div>
+                <h3>${question.question}</h3>
+                <div class="options">
+                    ${question.options.map((option, index) => `
+                        <div class="option" onclick="selectOption(${index}, '${option.theory}')">
+                            <div class="option-text">${option.text}</div>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+
+            updateProgress();
+            updateNavigation();
+            selectedOption = null;
+        }
+
+        function selectOption(index, theory) {
+            // Remove previous selection
+            document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+            
+            // Add selection to clicked option with fun effect
+            const selectedElement = document.querySelectorAll('.option')[index];
+            selectedElement.classList.add('selected');
+            
+            // Add sparkle effect
+            createSparkles(selectedElement);
+            
+            // Store answer
+            answers[currentQuestion] = theory;
+            selectedOption = index;
+            
+            // Enable next button with delay for effect
+            setTimeout(() => {
+                document.getElementById('next-btn').disabled = false;
+            }, 300);
+        }
+
+        function createSparkles(element) {
+            for (let i = 0; i < 8; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.innerHTML = ['✨', '💫', '⭐', '🌟'][Math.floor(Math.random() * 4)];
+                sparkle.style.position = 'absolute';
+                sparkle.style.fontSize = '1.5rem';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '1000';
+                sparkle.style.animation = `sparkleEffect 1.5s ease-out forwards`;
+                
+                const rect = element.getBoundingClientRect();
+                sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
+                
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => sparkle.remove(), 1500);
+            }
+        }
+
+        // Add sparkle animation to CSS
+        const sparkleStyle = document.createElement('style');
+        sparkleStyle.textContent = `
+            @keyframes sparkleEffect {
+                0% { 
+                    opacity: 0; 
+                    transform: scale(0) rotate(0deg); 
+                }
+                30% { 
+                    opacity: 1; 
+                    transform: scale(1.3) rotate(180deg); 
+                }
+                100% { 
+                    opacity: 0; 
+                    transform: scale(0) rotate(360deg) translateY(-60px); 
+                }
+            }
+        `;
+        document.head.appendChild(sparkleStyle);
+
+        function nextQuestion() {
+            if (selectedOption === null) return;
+            
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                displayQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                displayQuestion();
+                
+                // Restore previous selection if exists
+                if (answers[currentQuestion] !== undefined) {
+                    const prevTheory = answers[currentQuestion];
+                    const prevIndex = questions[currentQuestion].options.findIndex(opt => opt.theory === prevTheory);
+                    if (prevIndex !== -1) {
+                        selectOption(prevIndex, prevTheory);
+                    }
+                }
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function updateNavigation() {
+            const prevBtn = document.getElementById('prev-btn');
+            const nextBtn = document.getElementById('next-btn');
+            
+            prevBtn.disabled = currentQuestion === 0;
+            nextBtn.disabled = selectedOption === null;
+            nextBtn.textContent = currentQuestion === questions.length - 1 ? 'Get Results ✨' : 'Next';
+        }
+
+        function calculateResult() {
+            const scores = {};
+            
+            Object.values(answers).forEach(theory => {
+                scores[theory] = (scores[theory] || 0) + 1;
+            });
+
+            return Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+        }
+
+        function showResults() {
+            const resultTheory = calculateResult();
+            const theory = theories[resultTheory];
+            
+            document.getElementById('quiz-section').classList.add('hidden');
+            document.getElementById('result-section').classList.remove('hidden');
+            
+            // Add confetti effect
+            createConfetti();
+            
+            document.getElementById('result-section').innerHTML = `
+                <div class="theory-symbol" style="color: ${theory.color}">${theory.symbol}</div>
+                <div class="theory-title">${theory.title}</div>
+                <div class="theory-member">${theory.member}</div>
+                <div class="theory-description">${theory.description}</div>
+                
+                <div class="share-section">
+                    <p style="margin-bottom: 25px; color: #1A1A1A; font-weight: 500; font-size: 1.2rem; font-style: italic;">
+                        <span class="fun-emoji">🌟</span>
+                        "Born from starlight, refined by theory, destined to inspire."
+                        <span class="fun-emoji">🌟</span>
+                    </p>
+                    <div style="margin: 35px 0;">
+                        <a href="https://thisisiveory.crd.co" target="_blank" style="
+                            display: inline-block;
+                            background: linear-gradient(135deg, #F8F6F0, #E8E6E3);
+                            color: #1A1A1A;
+                            padding: 15px 35px;
+                            border-radius: 30px;
+                            text-decoration: none;
+                            font-weight: 600;
+                            border: 2px solid #C4ACE3;
+                            transition: all 0.4s ease;
+                            margin: 0 10px;
+                            box-shadow: 0 8px 20px rgba(196, 172, 227, 0.3);
+                        " onmouseover="this.style.background='linear-gradient(135deg, #C4ACE3, #B8DCF2)'; this.style.color='white'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 30px rgba(196, 172, 227, 0.5)';" 
+                           onmouseout="this.style.background='linear-gradient(135deg, #F8F6F0, #E8E6E3)'; this.style.color='#1A1A1A'; this.style.transform='translateY(0px)'; this.style.boxShadow='0 8px 20px rgba(196, 172, 227, 0.3)';">
+                            Visit Our Kingdom <span class="fun-emoji">👑</span>
+                        </a>
+                    </div>
+                    <button class="btn btn-primary" onclick="shareResult('${resultTheory}')" style="margin: 10px;">
+                        Share Your Theory <span class="fun-emoji">🚀</span>
+                    </button>
+                    <button class="btn restart-btn" onclick="restartQuiz()">
+                        Discover Another Theory <span class="fun-emoji">🔄</span>
+                    </button>
+                </div>
+            `;
+        }
+
+        function createConfetti() {
+            const confettiColors = ['#C4ACE3', '#B8DCF2', '#F8F6F0', '#E8E6E3', '#87ceeb', '#ffefd5'];
+            const confettiShapes = ['🎉', '✨', '💫', '⭐', '🌟', '👑', '♔', '♡', '✧', '◈', '◊', '⚜'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                const isEmoji = Math.random() > 0.4;
+                
+                if (isEmoji) {
+                    confetti.innerHTML = confettiShapes[Math.floor(Math.random() * confettiShapes.length)];
+                    confetti.style.fontSize = (1.2 + Math.random() * 0.8) + 'rem';
+                } else {
+                    confetti.style.backgroundColor = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+                    confetti.style.width = (8 + Math.random() * 6) + 'px';
+                    confetti.style.height = (8 + Math.random() * 6) + 'px';
+                    confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+                }
+                
+                confetti.style.position = 'fixed';
+                confetti.style.left = Math.random() * window.innerWidth + 'px';
+                confetti.style.top = '-30px';
+                confetti.style.pointerEvents = 'none';
+                confetti.style.zIndex = '1000';
+                confetti.style.animation = `confettiFall ${3 + Math.random() * 4}s ease-out forwards`;
+                
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 7000);
+            }
+        }
+
+        // Add confetti animation
+        const confettiStyle = document.createElement('style');
+        confettiStyle.textContent = `
+            @keyframes confettiFall {
+                0% { 
+                    transform: translateY(-30px) rotate(0deg); 
+                    opacity: 1; 
+                }
+                100% { 
+                    transform: translateY(${window.innerHeight + 150}px) rotate(${360 + Math.random() * 720}deg); 
+                    opacity: 0; 
+                }
+            }
+        `;
+        document.head.appendChild(confettiStyle);
+
+        function shareResult(theory) {
+            const theoryData = theories[theory];
+            const shareText = `I embody the ${theoryData.title}! My IVEORY court awaits. Discover your inner nobility at thisisiveory.crd.co ✨ #IVEORY #TheTheoryCodex #MyTheory`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'My IVEORY Theory Result',
+                    text: shareText,
+                    url: 'https://thisisiveory.crd.co'
+                });
+            } else {
+                navigator.clipboard.writeText(shareText).then(() => {
+                    // Create elegant notification
+                    const notification = document.createElement('div');
+                    notification.innerHTML = 'Result copied to clipboard! ✨';
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: linear-gradient(135deg, #C4ACE3, #B8DCF2);
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 25px;
+                        font-weight: 600;
+                        box-shadow: 0 10px 25px rgba(196, 172, 227, 0.4);
+                        z-index: 10000;
+                        animation: slideInRight 0.5s ease-out;
+                    `;
+                    document.body.appendChild(notification);
+                    setTimeout(() => notification.remove(), 3000);
+                }).catch(() => {
+                    alert('Result ready to share! Copy the text and share it on your social media.');
+                });
+            }
+        }
+
+        // Add slide-in animation for notification
+        const notificationStyle = document.createElement('style');
+        notificationStyle.textContent = `
+            @keyframes slideInRight {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+        `;
+        document.head.appendChild(notificationStyle);
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+            selectedOption = null;
+            quizStarted = false;
+            
+            document.getElementById('result-section').classList.add('hidden');
+            document.getElementById('welcome-section').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
